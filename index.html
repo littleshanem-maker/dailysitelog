@@ -10,86 +10,121 @@
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      font-size: 18px;
+      font-size: 16px;
       line-height: 1.5;
-      color: #1a1a1a;
-      background: #f0f0f0;
+      color: #2d3748;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
       -webkit-text-size-adjust: 100%;
     }
 
-    /* ── Layout ───────────────────────────────────────── */
+    /* ── App Container ────────────────────────────────── */
     .app {
-      max-width: 600px;
+      max-width: 480px;
       margin: 0 auto;
-      padding: 0 0 120px;
-      background: #fff;
+      padding: 0 0 140px;
       min-height: 100vh;
     }
 
     /* ── Header ───────────────────────────────────────── */
     .header {
-      background: #1a5276;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       color: #fff;
-      padding: 20px 16px;
-      position: sticky;
-      top: 0;
-      z-index: 100;
+      padding: 24px 20px 32px;
+      text-align: center;
     }
     .header h1 {
-      font-size: 22px;
-      font-weight: 700;
-      margin-bottom: 12px;
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+    }
+    .header-subtitle {
+      font-size: 14px;
+      opacity: 0.85;
+      font-weight: 500;
     }
     .header-fields {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 12px;
+      margin-top: 20px;
     }
     .header input {
       width: 100%;
-      font-size: 18px;
-      padding: 12px 14px;
-      border: 2px solid rgba(255,255,255,0.4);
-      border-radius: 8px;
-      background: rgba(255,255,255,0.15);
+      font-size: 16px;
+      padding: 14px 18px;
+      border: none;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.2);
       color: #fff;
-      min-height: 48px;
+      min-height: 52px;
+      font-weight: 500;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
-    .header input::placeholder { color: rgba(255,255,255,0.6); }
+    .header input::placeholder { color: rgba(255,255,255,0.7); }
     .header input:focus {
       outline: none;
-      border-color: #fff;
-      background: rgba(255,255,255,0.25);
+      background: rgba(255,255,255,0.3);
+      box-shadow: 0 0 0 3px rgba(255,255,255,0.3);
     }
-    /* Date input color fix */
     .header input[type="date"] { color-scheme: dark; }
 
-    /* ── Sections ─────────────────────────────────────── */
-    .section {
-      padding: 20px 16px;
-      border-bottom: 6px solid #f0f0f0;
+    /* ── Content Area ─────────────────────────────────── */
+    .content {
+      background: #f7f8fc;
+      border-radius: 32px 32px 0 0;
+      margin-top: -20px;
+      padding: 24px 16px;
+      min-height: calc(100vh - 200px);
     }
-    .section-title {
-      font-size: 20px;
-      font-weight: 700;
-      color: #1a5276;
-      margin-bottom: 14px;
+
+    /* ── Cards ────────────────────────────────────────── */
+    .card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 20px;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 20px rgba(102, 126, 234, 0.1);
+    }
+    .card-header {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 12px;
+      margin-bottom: 16px;
     }
-    .section-title .icon {
-      font-size: 22px;
-      line-height: 1;
+    .card-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+    .card-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a1a2e;
+    }
+    .card-subtitle {
+      font-size: 13px;
+      color: #8b8fa3;
+      font-weight: 500;
     }
 
     /* ── Form Controls ────────────────────────────────── */
     label {
       display: block;
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 600;
-      color: #333;
-      margin-bottom: 6px;
+      color: #4a5568;
+      margin-bottom: 8px;
     }
 
     input[type="text"],
@@ -97,35 +132,39 @@
     select,
     textarea {
       width: 100%;
-      font-size: 18px;
-      padding: 12px 14px;
-      border: 2px solid #ccc;
-      border-radius: 8px;
-      background: #fff;
-      color: #1a1a1a;
-      min-height: 48px;
+      font-size: 16px;
+      padding: 14px 16px;
+      border: 2px solid #e8ecf4;
+      border-radius: 14px;
+      background: #f7f8fc;
+      color: #2d3748;
+      min-height: 52px;
+      font-weight: 500;
+      transition: all 0.2s ease;
       -webkit-appearance: none;
       appearance: none;
     }
     input:focus, select:focus, textarea:focus {
       outline: none;
-      border-color: #1a5276;
-      box-shadow: 0 0 0 3px rgba(26,82,118,0.15);
+      border-color: #667eea;
+      background: #fff;
+      box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.15);
     }
     textarea {
       min-height: 120px;
       resize: vertical;
     }
     select {
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23333' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23667eea' stroke-width='2' fill='none'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
-      background-position: right 14px center;
-      padding-right: 40px;
+      background-position: right 16px center;
+      padding-right: 44px;
     }
 
     .field-group {
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
+    .field-group:last-child { margin-bottom: 0; }
 
     /* ── Buttons ───────────────────────────────────────── */
     .btn {
@@ -133,51 +172,83 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      font-size: 18px;
-      font-weight: 600;
-      padding: 14px 20px;
+      font-size: 16px;
+      font-weight: 700;
+      padding: 14px 24px;
       border: none;
-      border-radius: 10px;
+      border-radius: 50px;
       cursor: pointer;
       min-height: 52px;
-      min-width: 52px;
-      transition: background 0.15s, transform 0.1s;
+      transition: all 0.2s ease;
       -webkit-tap-highlight-color: transparent;
     }
     .btn:active { transform: scale(0.97); }
 
     .btn-primary {
-      background: #1a5276;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       color: #fff;
-      width: 100%;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
     }
-    .btn-primary:hover { background: #154360; }
+    .btn-primary:hover {
+      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: #f0f1f5;
+      color: #667eea;
+    }
+    .btn-secondary:hover { background: #e8ecf4; }
 
     .btn-danger {
-      background: #c0392b;
+      background: linear-gradient(135deg, #ff6b6b 0%, #ee5a5a 100%);
       color: #fff;
-      padding: 10px 14px;
-      min-height: 44px;
-      font-size: 16px;
-      border-radius: 8px;
+      padding: 10px 16px;
+      min-height: 40px;
+      font-size: 14px;
+      border-radius: 12px;
     }
-    .btn-danger:hover { background: #a93226; }
 
     .btn-save {
-      background: #27ae60;
+      background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
       color: #fff;
-      width: 100%;
-      font-size: 20px;
-      padding: 18px 20px;
-      min-height: 60px;
+      flex: 1;
+      font-size: 17px;
+      padding: 18px 24px;
+      min-height: 58px;
+      box-shadow: 0 4px 15px rgba(17, 153, 142, 0.4);
     }
-    .btn-save:hover { background: #219a52; }
 
-    /* ── Inline Add Row ───────────────────────────────── */
+    .btn-report {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #fff;
+      flex: 1;
+      font-size: 17px;
+      padding: 18px 24px;
+      min-height: 58px;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    }
+    .btn-report:disabled {
+      background: #a0aec0;
+      box-shadow: none;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .btn-report.sending { background: #a0aec0; box-shadow: none; }
+    .btn-report.success {
+      background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+      box-shadow: 0 4px 15px rgba(17, 153, 142, 0.4);
+    }
+    .btn-report.error {
+      background: linear-gradient(135deg, #ff6b6b 0%, #ee5a5a 100%);
+      box-shadow: 0 4px 15px rgba(238, 90, 90, 0.4);
+    }
+
+    /* ── Add Row ──────────────────────────────────────── */
     .add-row {
       display: flex;
-      gap: 8px;
-      margin-bottom: 12px;
+      gap: 10px;
+      margin-bottom: 14px;
     }
     .add-row input, .add-row select {
       flex: 1;
@@ -185,7 +256,8 @@
     }
     .add-row .btn {
       flex-shrink: 0;
-      padding: 12px 16px;
+      padding: 14px 18px;
+      border-radius: 14px;
     }
 
     /* ── List Items ────────────────────────────────────── */
@@ -193,81 +265,80 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: #f7f9fb;
-      border: 2px solid #e0e6ed;
-      border-radius: 8px;
-      padding: 12px 14px;
-      margin-bottom: 8px;
-      font-size: 17px;
+      background: linear-gradient(135deg, rgba(102,126,234,0.08) 0%, rgba(118,75,162,0.08) 100%);
+      border-radius: 14px;
+      padding: 14px 16px;
+      margin-bottom: 10px;
     }
     .list-item-text {
       flex: 1;
-      font-weight: 500;
+      font-weight: 600;
+      color: #2d3748;
     }
     .list-item-text .hours {
-      color: #1a5276;
+      color: #667eea;
       font-weight: 700;
     }
     .list-empty {
-      color: #888;
+      color: #a0aec0;
       font-style: italic;
-      padding: 12px 0;
-      font-size: 16px;
+      padding: 8px 0;
+      font-size: 14px;
+      text-align: center;
     }
 
-    /* ── Red Alert Toggle ─────────────────────────────── */
+    /* ── Alert Toggle ─────────────────────────────────── */
     .alert-toggle {
       display: flex;
       align-items: center;
       gap: 14px;
-      background: #fef9f9;
-      border: 2px solid #e0e0e0;
-      border-radius: 10px;
-      padding: 14px 16px;
+      background: linear-gradient(135deg, rgba(255,107,107,0.1) 0%, rgba(238,90,90,0.1) 100%);
+      border: 2px solid rgba(255,107,107,0.2);
+      border-radius: 16px;
+      padding: 16px;
       cursor: pointer;
-      min-height: 52px;
-      -webkit-tap-highlight-color: transparent;
-      transition: background 0.2s, border-color 0.2s;
+      min-height: 56px;
+      transition: all 0.2s ease;
       user-select: none;
     }
     .alert-toggle.active {
-      background: #fdedec;
-      border-color: #c0392b;
+      background: linear-gradient(135deg, rgba(255,107,107,0.2) 0%, rgba(238,90,90,0.2) 100%);
+      border-color: #ff6b6b;
     }
     .alert-toggle-switch {
-      width: 56px;
-      height: 32px;
-      border-radius: 16px;
-      background: #ccc;
+      width: 52px;
+      height: 30px;
+      border-radius: 15px;
+      background: #e2e8f0;
       position: relative;
       flex-shrink: 0;
       transition: background 0.2s;
     }
     .alert-toggle.active .alert-toggle-switch {
-      background: #c0392b;
+      background: linear-gradient(135deg, #ff6b6b 0%, #ee5a5a 100%);
     }
     .alert-toggle-switch::after {
       content: "";
       position: absolute;
       top: 3px;
       left: 3px;
-      width: 26px;
-      height: 26px;
+      width: 24px;
+      height: 24px;
       border-radius: 50%;
       background: #fff;
       transition: transform 0.2s;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
     }
     .alert-toggle.active .alert-toggle-switch::after {
-      transform: translateX(24px);
+      transform: translateX(22px);
     }
     .alert-toggle-label {
-      font-size: 18px;
+      font-size: 15px;
       font-weight: 600;
-      color: #333;
+      color: #4a5568;
     }
     .alert-toggle.active .alert-toggle-label {
-      color: #c0392b;
+      color: #e53e3e;
     }
 
     /* ── Photo Section ────────────────────────────────── */
@@ -275,37 +346,39 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
+      gap: 12px;
       width: 100%;
-      font-size: 20px;
+      font-size: 16px;
       font-weight: 700;
-      padding: 20px;
-      min-height: 64px;
-      border: 3px dashed #1a5276;
-      border-radius: 12px;
-      background: #eaf2f8;
-      color: #1a5276;
+      padding: 24px;
+      min-height: 80px;
+      border: 3px dashed rgba(102,126,234,0.4);
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(102,126,234,0.05) 0%, rgba(118,75,162,0.05) 100%);
+      color: #667eea;
       cursor: pointer;
-      -webkit-tap-highlight-color: transparent;
-      transition: background 0.15s, transform 0.1s;
+      transition: all 0.2s ease;
     }
-    .photo-capture-btn:active { transform: scale(0.97); background: #d4e6f1; }
+    .photo-capture-btn:active { transform: scale(0.98); }
+    .photo-capture-btn:hover {
+      background: linear-gradient(135deg, rgba(102,126,234,0.1) 0%, rgba(118,75,162,0.1) 100%);
+      border-color: #667eea;
+    }
     .photo-capture-btn .camera-icon { font-size: 28px; }
     .photo-input { display: none; }
 
     .photo-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-      margin-top: 12px;
+      gap: 10px;
+      margin-top: 14px;
     }
     .photo-thumb {
       position: relative;
       aspect-ratio: 1;
-      border-radius: 8px;
+      border-radius: 14px;
       overflow: hidden;
-      border: 2px solid #e0e6ed;
-      background: #f0f0f0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
     .photo-thumb img {
       width: 100%;
@@ -315,56 +388,55 @@
     }
     .photo-thumb-remove {
       position: absolute;
-      top: 4px;
-      right: 4px;
-      width: 32px;
-      height: 32px;
+      top: 6px;
+      right: 6px;
+      width: 28px;
+      height: 28px;
       border-radius: 50%;
-      background: rgba(192,57,43,0.9);
+      background: rgba(255,107,107,0.95);
       color: #fff;
       border: none;
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 700;
-      line-height: 1;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     }
     .photo-thumb-name {
       position: absolute;
       bottom: 0;
       left: 0;
       right: 0;
-      background: rgba(0,0,0,0.6);
+      background: linear-gradient(transparent, rgba(0,0,0,0.7));
       color: #fff;
-      font-size: 12px;
-      padding: 3px 6px;
+      font-size: 11px;
+      padding: 16px 8px 6px;
       text-align: center;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      font-weight: 500;
     }
     .photo-count {
-      margin-top: 8px;
-      font-size: 15px;
-      color: #666;
+      margin-top: 10px;
+      font-size: 14px;
+      color: #667eea;
+      font-weight: 600;
+      text-align: center;
     }
 
     /* ── Signature Pad ───────────────────────────────── */
     .sig-wrapper {
       position: relative;
-      border: 3px solid #1a5276;
-      border-radius: 10px;
+      border: 3px solid #667eea;
+      border-radius: 20px;
       overflow: hidden;
       background: #fff;
-      touch-action: none;          /* prevent scroll while signing */
+      touch-action: none;
     }
     .sig-canvas {
       display: block;
       width: 100%;
-      height: 180px;
+      height: 160px;
       cursor: crosshair;
     }
     .sig-placeholder {
@@ -372,59 +444,54 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      font-size: 18px;
-      color: #aaa;
+      font-size: 16px;
+      color: #a0aec0;
       pointer-events: none;
-      user-select: none;
+      font-weight: 500;
     }
     .sig-line {
       position: absolute;
-      bottom: 40px;
-      left: 20px;
-      right: 20px;
-      border-bottom: 2px dashed #ccc;
+      bottom: 36px;
+      left: 24px;
+      right: 24px;
+      border-bottom: 2px dashed #e2e8f0;
       pointer-events: none;
     }
-    .sig-actions {
-      display: flex;
-      gap: 8px;
-      margin-top: 10px;
-    }
+    .sig-actions { margin-top: 12px; }
     .btn-clear {
-      background: #95a5a6;
-      color: #fff;
+      background: #f0f1f5;
+      color: #667eea;
       width: 100%;
-      font-size: 18px;
+      font-size: 16px;
       padding: 14px 20px;
-      min-height: 52px;
+      min-height: 50px;
     }
-    .btn-clear:hover { background: #7f8c8d; }
+    .btn-clear:hover { background: #e8ecf4; }
     .sig-status {
-      margin-top: 8px;
-      font-size: 15px;
-      color: #27ae60;
+      margin-top: 10px;
+      font-size: 14px;
+      color: #38ef7d;
       font-weight: 600;
+      text-align: center;
     }
 
-    /* ── Saved Banner ─────────────────────────────────── */
+    /* ── Banner ───────────────────────────────────────── */
     .save-banner {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
-      background: #27ae60;
+      background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
       color: #fff;
       text-align: center;
-      padding: 14px;
-      font-size: 18px;
-      font-weight: 600;
+      padding: 16px;
+      font-size: 16px;
+      font-weight: 700;
       z-index: 200;
       transform: translateY(-100%);
       transition: transform 0.3s ease;
     }
-    .save-banner.show {
-      transform: translateY(0);
-    }
+    .save-banner.show { transform: translateY(0); }
 
     /* ── Bottom Bar ────────────────────────────────────── */
     .bottom-bar {
@@ -433,50 +500,26 @@
       left: 0;
       right: 0;
       background: #fff;
-      padding: 12px 16px;
-      border-top: 2px solid #e0e0e0;
+      padding: 16px;
+      border-radius: 24px 24px 0 0;
+      box-shadow: 0 -4px 30px rgba(0,0,0,0.1);
       z-index: 100;
       display: flex;
       justify-content: center;
     }
     .bottom-bar-inner {
       display: flex;
-      gap: 10px;
+      gap: 12px;
       width: 100%;
-      max-width: 600px;
-    }
-    .bottom-bar .btn-save {
-      flex: 1;
-    }
-    .btn-report {
-      background: #1a5276;
-      color: #fff;
-      flex: 1;
-      font-size: 18px;
-      padding: 18px 16px;
-      min-height: 60px;
-    }
-    .btn-report:hover { background: #154360; }
-    .btn-report:disabled {
-      background: #7f8c8d;
-      cursor: not-allowed;
-      transform: none;
-    }
-    .btn-report.sending {
-      background: #7f8c8d;
-    }
-    .btn-report.success {
-      background: #27ae60;
-    }
-    .btn-report.error {
-      background: #c0392b;
+      max-width: 480px;
     }
 
-    /* ── Report Modal ───────────────────────────────────── */
+    /* ── Modal ────────────────────────────────────────── */
     .modal-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.6);
+      background: rgba(26,26,46,0.7);
+      backdrop-filter: blur(4px);
       z-index: 300;
       display: none;
       align-items: center;
@@ -486,74 +529,74 @@
     .modal-overlay.show { display: flex; }
     .modal {
       background: #fff;
-      border-radius: 12px;
+      border-radius: 24px;
       width: 100%;
-      max-width: 600px;
+      max-width: 480px;
       max-height: 80vh;
       display: flex;
       flex-direction: column;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
     }
     .modal-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 16px 20px;
-      border-bottom: 2px solid #e0e0e0;
+      padding: 20px 24px;
+      border-bottom: 1px solid #f0f1f5;
     }
     .modal-title {
       font-size: 20px;
       font-weight: 700;
-      color: #1a5276;
+      color: #1a1a2e;
     }
     .modal-close {
-      width: 44px;
-      height: 44px;
+      width: 40px;
+      height: 40px;
       border: none;
-      background: #f0f0f0;
+      background: #f0f1f5;
       border-radius: 50%;
-      font-size: 24px;
+      font-size: 22px;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #333;
+      color: #4a5568;
+      transition: all 0.2s ease;
     }
-    .modal-close:hover { background: #e0e0e0; }
+    .modal-close:hover { background: #e8ecf4; }
     .modal-body {
       flex: 1;
       overflow-y: auto;
-      padding: 16px 20px;
+      padding: 20px 24px;
     }
     .report-text {
-      font-family: monospace;
-      font-size: 14px;
+      font-family: "SF Mono", Monaco, monospace;
+      font-size: 13px;
       line-height: 1.6;
       white-space: pre-wrap;
       word-break: break-word;
-      background: #f7f9fb;
-      border: 2px solid #e0e6ed;
-      border-radius: 8px;
-      padding: 14px;
+      background: #f7f8fc;
+      border-radius: 16px;
+      padding: 16px;
       min-height: 200px;
+      color: #4a5568;
     }
     .modal-footer {
-      padding: 16px 20px;
-      border-top: 2px solid #e0e0e0;
-      display: flex;
-      gap: 10px;
+      padding: 20px 24px;
+      border-top: 1px solid #f0f1f5;
     }
     .btn-copy {
-      background: #27ae60;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       color: #fff;
-      flex: 1;
-      font-size: 18px;
-      padding: 14px 20px;
-      min-height: 52px;
+      width: 100%;
+      font-size: 16px;
+      padding: 16px 24px;
+      min-height: 54px;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
     }
-    .btn-copy:hover { background: #219a52; }
     .btn-copy.copied {
-      background: #1a5276;
+      background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+      box-shadow: 0 4px 15px rgba(17, 153, 142, 0.4);
     }
   </style>
 </head>
@@ -566,110 +609,151 @@
   <!-- ── Header ────────────────────────────────────── -->
   <div class="header">
     <h1>Daily Site Log</h1>
+    <p class="header-subtitle">Construction Progress Tracker</p>
     <div class="header-fields">
-      <input type="text" id="siteName" placeholder="Site Name" aria-label="Site Name">
+      <input type="text" id="siteName" placeholder="Site / Project Name" aria-label="Site Name">
       <input type="date" id="logDate" aria-label="Date">
     </div>
   </div>
 
-  <!-- ── Site Conditions ──────────────────────────── -->
-  <div class="section">
-    <div class="section-title"><span class="icon">&#9729;</span> Site Conditions</div>
-    <div class="field-group">
-      <label for="weather">Weather</label>
-      <select id="weather">
-        <option value="">Pick one...</option>
-        <option value="Clear / Sunny">Clear / Sunny</option>
-        <option value="Partly Cloudy">Partly Cloudy</option>
-        <option value="Overcast">Overcast</option>
-        <option value="Light Rain">Light Rain</option>
-        <option value="Heavy Rain">Heavy Rain</option>
-        <option value="Snow">Snow</option>
-        <option value="Windy">Windy</option>
-        <option value="Fog">Fog</option>
-        <option value="Extreme Heat">Extreme Heat</option>
-        <option value="Extreme Cold">Extreme Cold</option>
-      </select>
-    </div>
-    <div class="field-group">
-      <label for="groundStatus">Ground Conditions</label>
-      <input type="text" id="groundStatus" placeholder="e.g. Dry, Muddy, Frozen, Wet">
-    </div>
-  </div>
+  <!-- ── Content Area ───────────────────────────────── -->
+  <div class="content">
 
-  <!-- ── Labor ────────────────────────────────────── -->
-  <div class="section">
-    <div class="section-title"><span class="icon">&#9879;</span> Labor</div>
-    <div class="add-row">
-      <input type="text" id="laborTrade" placeholder="Trade (e.g. Electrician)">
-      <input type="number" id="laborHours" placeholder="Hrs" min="0" step="0.5" style="max-width:90px;">
-      <button class="btn btn-primary" onclick="addLabor()" style="width:auto;" aria-label="Add trade">+ Add</button>
-    </div>
-    <div id="laborList">
-      <div class="list-empty">No trades added yet.</div>
-    </div>
-  </div>
-
-  <!-- ── Progress & Blockers ──────────────────────── -->
-  <div class="section">
-    <div class="section-title"><span class="icon">&#9998;</span> Progress &amp; Blockers</div>
-    <div class="field-group">
-      <label for="progressNotes">What got done today?</label>
-      <textarea id="progressNotes" placeholder="Describe today's work and any issues..."></textarea>
-    </div>
-    <div class="field-group">
-      <div class="alert-toggle" id="alertToggle" onclick="toggleAlert()" role="switch" aria-checked="false" tabindex="0">
-        <div class="alert-toggle-switch"></div>
-        <span class="alert-toggle-label">Red Alert &mdash; Major Blocker</span>
+    <!-- ── Site Conditions ──────────────────────────── -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">☁️</div>
+        <div>
+          <div class="card-title">Site Conditions</div>
+          <div class="card-subtitle">Weather & ground status</div>
+        </div>
+      </div>
+      <div class="field-group">
+        <label for="weather">Weather</label>
+        <select id="weather">
+          <option value="">Select weather...</option>
+          <option value="Clear / Sunny">☀️ Clear / Sunny</option>
+          <option value="Partly Cloudy">⛅ Partly Cloudy</option>
+          <option value="Overcast">☁️ Overcast</option>
+          <option value="Light Rain">🌧️ Light Rain</option>
+          <option value="Heavy Rain">⛈️ Heavy Rain</option>
+          <option value="Snow">❄️ Snow</option>
+          <option value="Windy">💨 Windy</option>
+          <option value="Fog">🌫️ Fog</option>
+          <option value="Extreme Heat">🔥 Extreme Heat</option>
+          <option value="Extreme Cold">🥶 Extreme Cold</option>
+        </select>
+      </div>
+      <div class="field-group">
+        <label for="groundStatus">Ground Conditions</label>
+        <input type="text" id="groundStatus" placeholder="e.g. Dry, Muddy, Frozen, Wet">
       </div>
     </div>
-  </div>
 
-  <!-- ── Deliveries ───────────────────────────────── -->
-  <div class="section">
-    <div class="section-title"><span class="icon">&#128666;</span> Deliveries</div>
-    <div class="add-row">
-      <input type="text" id="deliveryItem" placeholder="Material received (e.g. 50 bags cement)">
-      <button class="btn btn-primary" onclick="addDelivery()" style="width:auto;" aria-label="Add delivery">+ Add</button>
+    <!-- ── Labor ────────────────────────────────────── -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">👷</div>
+        <div>
+          <div class="card-title">Labor</div>
+          <div class="card-subtitle">Trades on site today</div>
+        </div>
+      </div>
+      <div class="add-row">
+        <input type="text" id="laborTrade" placeholder="Trade (e.g. Electrician)">
+        <input type="number" id="laborHours" placeholder="Hrs" min="0" step="0.5" style="max-width:80px;">
+        <button class="btn btn-primary" onclick="addLabor()" style="border-radius:14px;" aria-label="Add">+</button>
+      </div>
+      <div id="laborList">
+        <div class="list-empty">No trades added yet</div>
+      </div>
     </div>
-    <div id="deliveryList">
-      <div class="list-empty">No deliveries recorded yet.</div>
-    </div>
-  </div>
 
-  <!-- ── Photos ──────────────────────────────────── -->
-  <div class="section">
-    <div class="section-title"><span class="icon">&#128247;</span> Photos</div>
-    <input type="file" id="photoInput" class="photo-input" accept="image/*" capture="environment" multiple>
-    <button class="photo-capture-btn" onclick="document.getElementById('photoInput').click()">
-      <span class="camera-icon">&#128247;</span> Capture Photo
-    </button>
-    <div id="photoGrid" class="photo-grid"></div>
-    <div id="photoCount" class="photo-count"></div>
-  </div>
+    <!-- ── Progress & Blockers ──────────────────────── -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">📝</div>
+        <div>
+          <div class="card-title">Progress & Blockers</div>
+          <div class="card-subtitle">What happened today?</div>
+        </div>
+      </div>
+      <div class="field-group">
+        <label for="progressNotes">Work completed</label>
+        <textarea id="progressNotes" placeholder="Describe today's progress and any issues..."></textarea>
+      </div>
+      <div class="field-group">
+        <div class="alert-toggle" id="alertToggle" onclick="toggleAlert()" role="switch" aria-checked="false" tabindex="0">
+          <div class="alert-toggle-switch"></div>
+          <span class="alert-toggle-label">🚨 Red Alert — Major Blocker</span>
+        </div>
+      </div>
+    </div>
 
-  <!-- ── Sign-Off ─────────────────────────────────── -->
-  <div class="section">
-    <div class="section-title"><span class="icon">&#9998;</span> Sign-Off</div>
-    <label>Your signature below confirms this log is complete.</label>
-    <div class="sig-wrapper">
-      <canvas id="sigCanvas" class="sig-canvas"></canvas>
-      <div class="sig-placeholder" id="sigPlaceholder">Sign here</div>
-      <div class="sig-line"></div>
+    <!-- ── Deliveries ───────────────────────────────── -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">📦</div>
+        <div>
+          <div class="card-title">Deliveries</div>
+          <div class="card-subtitle">Materials received today</div>
+        </div>
+      </div>
+      <div class="add-row">
+        <input type="text" id="deliveryItem" placeholder="Material (e.g. 50 bags cement)">
+        <button class="btn btn-primary" onclick="addDelivery()" style="border-radius:14px;" aria-label="Add">+</button>
+      </div>
+      <div id="deliveryList">
+        <div class="list-empty">No deliveries recorded</div>
+      </div>
     </div>
-    <div class="sig-actions">
-      <button class="btn btn-clear" onclick="clearSignature()">Clear</button>
+
+    <!-- ── Photos ──────────────────────────────────── -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">📷</div>
+        <div>
+          <div class="card-title">Photos</div>
+          <div class="card-subtitle">Document site progress</div>
+        </div>
+      </div>
+      <input type="file" id="photoInput" class="photo-input" accept="image/*" capture="environment" multiple>
+      <button class="photo-capture-btn" onclick="document.getElementById('photoInput').click()">
+        <span class="camera-icon">📸</span> Take Photo
+      </button>
+      <div id="photoGrid" class="photo-grid"></div>
+      <div id="photoCount" class="photo-count"></div>
     </div>
-    <div class="sig-status" id="sigStatus"></div>
-  </div>
+
+    <!-- ── Sign-Off ─────────────────────────────────── -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">✍️</div>
+        <div>
+          <div class="card-title">Sign-Off</div>
+          <div class="card-subtitle">Confirm log is complete</div>
+        </div>
+      </div>
+      <div class="sig-wrapper">
+        <canvas id="sigCanvas" class="sig-canvas"></canvas>
+        <div class="sig-placeholder" id="sigPlaceholder">Sign here</div>
+        <div class="sig-line"></div>
+      </div>
+      <div class="sig-actions">
+        <button class="btn btn-clear" onclick="clearSignature()">Clear Signature</button>
+      </div>
+      <div class="sig-status" id="sigStatus"></div>
+    </div>
+
+  </div><!-- /.content -->
 
 </div><!-- /.app -->
 
-<!-- ── Fixed Bottom Bar ──────────────────────────── -->
+<!-- ── Bottom Bar ──────────────────────────────── -->
 <div class="bottom-bar">
   <div class="bottom-bar-inner">
-    <button class="btn btn-save" onclick="saveLog()">Save Log</button>
-    <button class="btn btn-report" id="sendReportBtn" onclick="sendReport()">Send Report</button>
+    <button class="btn btn-save" onclick="saveLog()">💾 Save</button>
+    <button class="btn btn-report" id="sendReportBtn" onclick="sendReport()">📤 Send Report</button>
   </div>
 </div>
 
@@ -677,7 +761,7 @@
 <div class="modal-overlay" id="reportModal">
   <div class="modal">
     <div class="modal-header">
-      <span class="modal-title">Daily Report</span>
+      <span class="modal-title">📋 Daily Report</span>
       <button class="modal-close" onclick="closeReport()" aria-label="Close">&times;</button>
     </div>
     <div class="modal-body">
@@ -693,9 +777,9 @@
   // ── State ───────────────────────────────────────────
   var laborEntries = [];
   var deliveryEntries = [];
-  var photoEntries = []; // { name, takenAt, dataUrl }
+  var photoEntries = [];
   var redAlert = false;
-  var signatureDataUrl = ''; // base64 PNG of signature
+  var signatureDataUrl = '';
 
   // ── Auto-fill today's date ──────────────────────────
   (function init() {
@@ -704,8 +788,6 @@
     var mm = String(today.getMonth() + 1).padStart(2, '0');
     var dd = String(today.getDate()).padStart(2, '0');
     document.getElementById('logDate').value = yyyy + '-' + mm + '-' + dd;
-
-    // Restore saved draft if available
     loadDraft();
   })();
 
@@ -736,15 +818,15 @@
   function renderLabor() {
     var container = document.getElementById('laborList');
     if (laborEntries.length === 0) {
-      container.innerHTML = '<div class="list-empty">No trades added yet.</div>';
+      container.innerHTML = '<div class="list-empty">No trades added yet</div>';
       return;
     }
     var html = '';
     for (var i = 0; i < laborEntries.length; i++) {
       html += '<div class="list-item">' +
         '<span class="list-item-text">' + escapeHtml(laborEntries[i].trade) +
-        ' &mdash; <span class="hours">' + laborEntries[i].hours + ' hrs</span></span>' +
-        '<button class="btn btn-danger" onclick="removeLabor(' + i + ')" aria-label="Remove">Remove</button>' +
+        ' — <span class="hours">' + laborEntries[i].hours + ' hrs</span></span>' +
+        '<button class="btn btn-danger" onclick="removeLabor(' + i + ')" aria-label="Remove">✕</button>' +
         '</div>';
     }
     container.innerHTML = html;
@@ -772,14 +854,14 @@
   function renderDeliveries() {
     var container = document.getElementById('deliveryList');
     if (deliveryEntries.length === 0) {
-      container.innerHTML = '<div class="list-empty">No deliveries recorded yet.</div>';
+      container.innerHTML = '<div class="list-empty">No deliveries recorded</div>';
       return;
     }
     var html = '';
     for (var i = 0; i < deliveryEntries.length; i++) {
       html += '<div class="list-item">' +
         '<span class="list-item-text">' + escapeHtml(deliveryEntries[i]) + '</span>' +
-        '<button class="btn btn-danger" onclick="removeDelivery(' + i + ')" aria-label="Remove">Remove</button>' +
+        '<button class="btn btn-danger" onclick="removeDelivery(' + i + ')" aria-label="Remove">✕</button>' +
         '</div>';
     }
     container.innerHTML = html;
@@ -805,8 +887,6 @@
         reader.readAsDataURL(file);
       })(files[i]);
     }
-
-    // Reset input so the same file can be re-selected
     e.target.value = '';
   });
 
@@ -830,12 +910,12 @@
     for (var i = 0; i < photoEntries.length; i++) {
       html += '<div class="photo-thumb">' +
         '<img src="' + photoEntries[i].dataUrl + '" alt="' + escapeHtml(photoEntries[i].name) + '">' +
-        '<button class="photo-thumb-remove" onclick="removePhoto(' + i + ')" aria-label="Remove photo">&times;</button>' +
+        '<button class="photo-thumb-remove" onclick="removePhoto(' + i + ')" aria-label="Remove">✕</button>' +
         '<div class="photo-thumb-name">' + escapeHtml(photoEntries[i].name) + '</div>' +
         '</div>';
     }
     grid.innerHTML = html;
-    countEl.textContent = photoEntries.length + (photoEntries.length === 1 ? ' photo attached' : ' photos attached');
+    countEl.textContent = photoEntries.length + ' photo' + (photoEntries.length === 1 ? '' : 's') + ' attached';
   }
 
   // ── Signature Pad ──────────────────────────────────
@@ -853,14 +933,12 @@
       ctx.scale(dpr, dpr);
       ctx.lineCap = 'round';
       ctx.lineJoin = 'round';
-      ctx.lineWidth = 4;
-      ctx.strokeStyle = '#1a1a1a';
-      // Redraw saved signature after resize
+      ctx.lineWidth = 3;
+      ctx.strokeStyle = '#667eea';
       if (signatureDataUrl) {
         var img = new Image();
         img.onload = function() {
           ctx.save();
-          var dpr2 = window.devicePixelRatio || 1;
           ctx.setTransform(1, 0, 0, 1, 0, 0);
           ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
           ctx.restore();
@@ -875,10 +953,7 @@
     function getPos(e) {
       var rect = canvas.getBoundingClientRect();
       var touch = e.touches ? e.touches[0] : e;
-      return {
-        x: touch.clientX - rect.left,
-        y: touch.clientY - rect.top
-      };
+      return { x: touch.clientX - rect.left, y: touch.clientY - rect.top };
     }
 
     function startDraw(e) {
@@ -906,25 +981,20 @@
       e.preventDefault();
       drawing = false;
       ctx.closePath();
-      // Save signature as base64
       signatureDataUrl = canvas.toDataURL('image/png');
-      document.getElementById('sigStatus').textContent = 'Signed';
+      document.getElementById('sigStatus').textContent = '✓ Signed';
       saveDraft();
     }
 
-    // Mouse events
     canvas.addEventListener('mousedown', startDraw);
     canvas.addEventListener('mousemove', draw);
     canvas.addEventListener('mouseup', endDraw);
     canvas.addEventListener('mouseleave', endDraw);
-
-    // Touch events
     canvas.addEventListener('touchstart', startDraw, { passive: false });
     canvas.addEventListener('touchmove', draw, { passive: false });
     canvas.addEventListener('touchend', endDraw);
     canvas.addEventListener('touchcancel', endDraw);
 
-    // Expose clear for the button
     window.clearSignature = function() {
       var dpr = window.devicePixelRatio || 1;
       ctx.save();
@@ -938,16 +1008,14 @@
       saveDraft();
     };
 
-    // Expose a way to restore a saved signature from draft
     window.restoreSignature = function(dataUrl) {
       if (!dataUrl) return;
       signatureDataUrl = dataUrl;
       hasSigned = true;
       document.getElementById('sigPlaceholder').style.display = 'none';
-      document.getElementById('sigStatus').textContent = 'Signed';
+      document.getElementById('sigStatus').textContent = '✓ Signed';
       var img = new Image();
       img.onload = function() {
-        var dpr = window.devicePixelRatio || 1;
         ctx.save();
         ctx.setTransform(1, 0, 0, 1, 0, 0);
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
@@ -974,16 +1042,10 @@
   // ── Save Log ────────────────────────────────────────
   function saveLog() {
     var log = gatherData();
-
-    // Save to localStorage as a completed log
     var logs = JSON.parse(localStorage.getItem('dailySiteLogs') || '[]');
     logs.push(log);
     localStorage.setItem('dailySiteLogs', JSON.stringify(logs));
-
-    // Clear draft
     localStorage.removeItem('dailySiteLogDraft');
-
-    // Show confirmation
     var banner = document.getElementById('saveBanner');
     banner.classList.add('show');
     setTimeout(function() { banner.classList.remove('show'); }, 2000);
@@ -995,13 +1057,10 @@
     try {
       localStorage.setItem('dailySiteLogDraft', JSON.stringify(data));
     } catch (e) {
-      // Storage full — save without image data to avoid losing text fields
       var lite = Object.assign({}, data);
-      lite.photos = data.photos.map(function(p) {
-        return { name: p.name, takenAt: p.takenAt, dataUrl: '' };
-      });
-      lite.signature = ''; // also drop signature to save space
-      try { localStorage.setItem('dailySiteLogDraft', JSON.stringify(lite)); } catch (e2) { /* give up */ }
+      lite.photos = data.photos.map(function(p) { return { name: p.name, takenAt: p.takenAt, dataUrl: '' }; });
+      lite.signature = '';
+      try { localStorage.setItem('dailySiteLogDraft', JSON.stringify(lite)); } catch (e2) {}
     }
   }
 
@@ -1015,33 +1074,21 @@
       if (data.weather) document.getElementById('weather').value = data.weather;
       if (data.groundConditions) document.getElementById('groundStatus').value = data.groundConditions;
       if (data.progressNotes) document.getElementById('progressNotes').value = data.progressNotes;
-      if (data.labor && data.labor.length) {
-        laborEntries = data.labor;
-        renderLabor();
-      }
-      if (data.deliveries && data.deliveries.length) {
-        deliveryEntries = data.deliveries;
-        renderDeliveries();
-      }
-      if (data.photos && data.photos.length) {
-        photoEntries = data.photos;
-        renderPhotos();
-      }
-      if (data.signature) {
-        restoreSignature(data.signature);
-      }
+      if (data.labor && data.labor.length) { laborEntries = data.labor; renderLabor(); }
+      if (data.deliveries && data.deliveries.length) { deliveryEntries = data.deliveries; renderDeliveries(); }
+      if (data.photos && data.photos.length) { photoEntries = data.photos; renderPhotos(); }
+      if (data.signature) { restoreSignature(data.signature); }
       if (data.redAlert) {
         redAlert = true;
         document.getElementById('alertToggle').classList.add('active');
         document.getElementById('alertToggle').setAttribute('aria-checked', 'true');
       }
-    } catch (e) { /* ignore corrupt draft */ }
+    } catch (e) {}
   }
 
   // ── Gather All Data ─────────────────────────────────
   function gatherData() {
     var dateVal = document.getElementById('logDate').value;
-    // Format date for display: "Feb 5, 2026"
     var displayDate = dateVal;
     if (dateVal) {
       var parts = dateVal.split('-');
@@ -1060,9 +1107,7 @@
       progressNotes: document.getElementById('progressNotes').value.trim(),
       redAlert: redAlert,
       deliveries: deliveryEntries.slice(),
-      photos: photoEntries.map(function(p) {
-        return { name: p.name, takenAt: p.takenAt, dataUrl: p.dataUrl };
-      }),
+      photos: photoEntries.map(function(p) { return { name: p.name, takenAt: p.takenAt, dataUrl: p.dataUrl }; }),
       signature: signatureDataUrl,
       savedAt: new Date().toISOString()
     };
@@ -1075,7 +1120,7 @@
   document.getElementById('groundStatus').addEventListener('input', saveDraft);
   document.getElementById('progressNotes').addEventListener('input', saveDraft);
 
-  // ── Allow Enter key to add items ────────────────────
+  // ── Enter key support ───────────────────────────────
   document.getElementById('laborHours').addEventListener('keydown', function(e) {
     if (e.key === 'Enter') { e.preventDefault(); addLabor(); }
   });
@@ -1085,8 +1130,6 @@
   document.getElementById('deliveryItem').addEventListener('keydown', function(e) {
     if (e.key === 'Enter') { e.preventDefault(); addDelivery(); }
   });
-
-  // ── Keyboard support for toggle ─────────────────────
   document.getElementById('alertToggle').addEventListener('keydown', function(e) {
     if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); toggleAlert(); }
   });
@@ -1098,28 +1141,20 @@
     return div.innerHTML;
   }
 
-  // ── Report Generation ─────────────────────────────────
+  // ── Report Generation ───────────────────────────────
   function generateMarkdownReport() {
     var data = gatherData();
     var lines = [];
-
-    // Title
     lines.push('# Daily Site Log');
     lines.push('');
-
-    // Site Info
     lines.push('## Site Information');
     lines.push('- **Site:** ' + (data.siteName || 'Not specified'));
     lines.push('- **Date:** ' + (data.dateFormatted || 'Not specified'));
     lines.push('');
-
-    // Site Conditions
     lines.push('## Site Conditions');
     lines.push('- **Weather:** ' + (data.weather || 'Not specified'));
     lines.push('- **Ground:** ' + (data.groundConditions || 'Not specified'));
     lines.push('');
-
-    // Labor
     lines.push('## Labor');
     if (data.labor && data.labor.length > 0) {
       var totalHours = 0;
@@ -1128,136 +1163,86 @@
         totalHours += data.labor[i].hours;
       }
       lines.push('- **Total:** ' + totalHours + ' hrs');
-    } else {
-      lines.push('No labor recorded.');
-    }
+    } else { lines.push('No labor recorded.'); }
     lines.push('');
-
-    // Progress & Blockers
     lines.push('## Progress');
-    if (data.progressNotes) {
-      lines.push(data.progressNotes);
-    } else {
-      lines.push('No progress notes.');
-    }
+    lines.push(data.progressNotes || 'No progress notes.');
     lines.push('');
-
     if (data.redAlert) {
-      lines.push('## ⚠️ RED ALERT - Major Blocker');
-      lines.push('**Attention required!** A major blocker has been flagged.');
+      lines.push('## ⚠️ RED ALERT');
+      lines.push('**Major blocker flagged!**');
       lines.push('');
     }
-
-    // Deliveries
     lines.push('## Deliveries');
     if (data.deliveries && data.deliveries.length > 0) {
-      for (var j = 0; j < data.deliveries.length; j++) {
-        lines.push('- ' + data.deliveries[j]);
-      }
-    } else {
-      lines.push('No deliveries today.');
-    }
+      for (var j = 0; j < data.deliveries.length; j++) { lines.push('- ' + data.deliveries[j]); }
+    } else { lines.push('No deliveries today.'); }
     lines.push('');
-
-    // Photos
     lines.push('## Photos');
     if (data.photos && data.photos.length > 0) {
-      lines.push(data.photos.length + ' photo(s) attached to this log.');
-      for (var k = 0; k < data.photos.length; k++) {
-        lines.push('- ' + data.photos[k].name);
-      }
-    } else {
-      lines.push('No photos attached.');
-    }
+      lines.push(data.photos.length + ' photo(s) attached.');
+    } else { lines.push('No photos attached.'); }
     lines.push('');
-
-    // Sign-off
     lines.push('## Sign-Off');
-    if (data.signature) {
-      lines.push('✓ Log signed and confirmed.');
-    } else {
-      lines.push('Not yet signed.');
-    }
+    lines.push(data.signature ? '✓ Signed' : 'Not signed');
     lines.push('');
-
-    // Footer
     lines.push('---');
     lines.push('*Generated: ' + new Date().toLocaleString() + '*');
-
     return lines.join('\n');
   }
 
-  // ── Send Report to Webhook ─────────────────────────
+  // ── Send Report to Webhook ──────────────────────────
   var WEBHOOK_URL = 'https://shanen8n.app.n8n.cloud/webhook-test/site-log-entry';
 
   function sendReport() {
     var btn = document.getElementById('sendReportBtn');
-    var originalText = btn.textContent;
-
-    // Prevent double-submit
+    var originalText = btn.innerHTML;
     if (btn.disabled) return;
 
-    // Set loading state
     btn.disabled = true;
-    btn.textContent = 'Sending...';
+    btn.innerHTML = '⏳ Sending...';
     btn.classList.remove('success', 'error');
     btn.classList.add('sending');
 
-    // Gather all data
     var data = gatherData();
-
-    // Also include the markdown report for convenience
     data.markdownReport = generateMarkdownReport();
 
-    // Send POST request
     fetch(WEBHOOK_URL, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
     })
     .then(function(response) {
-      if (!response.ok) {
-        throw new Error('Server returned ' + response.status);
-      }
+      if (!response.ok) throw new Error('Server returned ' + response.status);
       return response;
     })
     .then(function() {
-      // Success!
-      btn.textContent = 'Sent to Office! ✓';
+      btn.innerHTML = '✅ Sent to Office!';
       btn.classList.remove('sending');
       btn.classList.add('success');
-
-      // Reset button after 3 seconds
       setTimeout(function() {
         btn.disabled = false;
-        btn.textContent = originalText;
+        btn.innerHTML = originalText;
         btn.classList.remove('success');
       }, 3000);
     })
     .catch(function(error) {
-      // Error
       console.error('Send failed:', error);
-      btn.textContent = 'Send Failed — Tap to Retry';
+      btn.innerHTML = '❌ Failed — Retry';
       btn.classList.remove('sending');
       btn.classList.add('error');
-
-      // Re-enable after 2 seconds
       setTimeout(function() {
         btn.disabled = false;
-        btn.textContent = originalText;
+        btn.innerHTML = originalText;
         btn.classList.remove('error');
       }, 3000);
     });
   }
 
-  // ── Preview Report (Modal) ────────────────────────────
+  // ── Modal Functions ─────────────────────────────────
   function showReport() {
-    var report = generateMarkdownReport();
-    document.getElementById('reportText').textContent = report;
+    document.getElementById('reportText').textContent = generateMarkdownReport();
     document.getElementById('reportModal').classList.add('show');
-    // Reset copy button
     var copyBtn = document.getElementById('copyBtn');
     copyBtn.textContent = 'Copy to Clipboard';
     copyBtn.classList.remove('copied');
@@ -1270,17 +1255,12 @@
   function copyReport() {
     var reportText = document.getElementById('reportText').textContent;
     var copyBtn = document.getElementById('copyBtn');
-
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(reportText).then(function() {
-        copyBtn.textContent = 'Copied!';
+        copyBtn.textContent = '✓ Copied!';
         copyBtn.classList.add('copied');
-      }).catch(function() {
-        fallbackCopy(reportText, copyBtn);
-      });
-    } else {
-      fallbackCopy(reportText, copyBtn);
-    }
+      }).catch(function() { fallbackCopy(reportText, copyBtn); });
+    } else { fallbackCopy(reportText, copyBtn); }
   }
 
   function fallbackCopy(text, btn) {
@@ -1292,20 +1272,15 @@
     textarea.select();
     try {
       document.execCommand('copy');
-      btn.textContent = 'Copied!';
+      btn.textContent = '✓ Copied!';
       btn.classList.add('copied');
-    } catch (e) {
-      btn.textContent = 'Copy failed';
-    }
+    } catch (e) { btn.textContent = 'Copy failed'; }
     document.body.removeChild(textarea);
   }
 
-  // Close modal on overlay click
   document.getElementById('reportModal').addEventListener('click', function(e) {
     if (e.target === this) closeReport();
   });
-
-  // Close modal on Escape key
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') closeReport();
   });
