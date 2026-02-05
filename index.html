@@ -439,8 +439,107 @@
       display: flex;
       justify-content: center;
     }
-    .bottom-bar .btn-save {
+    .bottom-bar-inner {
+      display: flex;
+      gap: 10px;
+      width: 100%;
       max-width: 600px;
+    }
+    .bottom-bar .btn-save {
+      flex: 1;
+    }
+    .btn-report {
+      background: #1a5276;
+      color: #fff;
+      flex: 1;
+      font-size: 18px;
+      padding: 18px 16px;
+      min-height: 60px;
+    }
+    .btn-report:hover { background: #154360; }
+
+    /* ── Report Modal ───────────────────────────────────── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 300;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .modal-overlay.show { display: flex; }
+    .modal {
+      background: #fff;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 600px;
+      max-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+    }
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      border-bottom: 2px solid #e0e0e0;
+    }
+    .modal-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #1a5276;
+    }
+    .modal-close {
+      width: 44px;
+      height: 44px;
+      border: none;
+      background: #f0f0f0;
+      border-radius: 50%;
+      font-size: 24px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #333;
+    }
+    .modal-close:hover { background: #e0e0e0; }
+    .modal-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px 20px;
+    }
+    .report-text {
+      font-family: monospace;
+      font-size: 14px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      word-break: break-word;
+      background: #f7f9fb;
+      border: 2px solid #e0e6ed;
+      border-radius: 8px;
+      padding: 14px;
+      min-height: 200px;
+    }
+    .modal-footer {
+      padding: 16px 20px;
+      border-top: 2px solid #e0e0e0;
+      display: flex;
+      gap: 10px;
+    }
+    .btn-copy {
+      background: #27ae60;
+      color: #fff;
+      flex: 1;
+      font-size: 18px;
+      padding: 14px 20px;
+      min-height: 52px;
+    }
+    .btn-copy:hover { background: #219a52; }
+    .btn-copy.copied {
+      background: #1a5276;
     }
   </style>
 </head>
@@ -552,9 +651,28 @@
 
 </div><!-- /.app -->
 
-<!-- ── Fixed Save Button ──────────────────────────── -->
+<!-- ── Fixed Bottom Bar ──────────────────────────── -->
 <div class="bottom-bar">
-  <button class="btn btn-save" onclick="saveLog()">Save Today's Log</button>
+  <div class="bottom-bar-inner">
+    <button class="btn btn-save" onclick="saveLog()">Save Log</button>
+    <button class="btn btn-report" onclick="showReport()">Send Report</button>
+  </div>
+</div>
+
+<!-- ── Report Modal ──────────────────────────────── -->
+<div class="modal-overlay" id="reportModal">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="modal-title">Daily Report</span>
+      <button class="modal-close" onclick="closeReport()" aria-label="Close">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="report-text" id="reportText"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-copy" id="copyBtn" onclick="copyReport()">Copy to Clipboard</button>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -965,6 +1083,152 @@
     div.textContent = str;
     return div.innerHTML;
   }
+
+  // ── Report Generation ─────────────────────────────────
+  function generateMarkdownReport() {
+    var data = gatherData();
+    var lines = [];
+
+    // Title
+    lines.push('# Daily Site Log');
+    lines.push('');
+
+    // Site Info
+    lines.push('## Site Information');
+    lines.push('- **Site:** ' + (data.siteName || 'Not specified'));
+    lines.push('- **Date:** ' + (data.dateFormatted || 'Not specified'));
+    lines.push('');
+
+    // Site Conditions
+    lines.push('## Site Conditions');
+    lines.push('- **Weather:** ' + (data.weather || 'Not specified'));
+    lines.push('- **Ground:** ' + (data.groundConditions || 'Not specified'));
+    lines.push('');
+
+    // Labor
+    lines.push('## Labor');
+    if (data.labor && data.labor.length > 0) {
+      var totalHours = 0;
+      for (var i = 0; i < data.labor.length; i++) {
+        lines.push('- ' + data.labor[i].trade + ': ' + data.labor[i].hours + ' hrs');
+        totalHours += data.labor[i].hours;
+      }
+      lines.push('- **Total:** ' + totalHours + ' hrs');
+    } else {
+      lines.push('No labor recorded.');
+    }
+    lines.push('');
+
+    // Progress & Blockers
+    lines.push('## Progress');
+    if (data.progressNotes) {
+      lines.push(data.progressNotes);
+    } else {
+      lines.push('No progress notes.');
+    }
+    lines.push('');
+
+    if (data.redAlert) {
+      lines.push('## ⚠️ RED ALERT - Major Blocker');
+      lines.push('**Attention required!** A major blocker has been flagged.');
+      lines.push('');
+    }
+
+    // Deliveries
+    lines.push('## Deliveries');
+    if (data.deliveries && data.deliveries.length > 0) {
+      for (var j = 0; j < data.deliveries.length; j++) {
+        lines.push('- ' + data.deliveries[j]);
+      }
+    } else {
+      lines.push('No deliveries today.');
+    }
+    lines.push('');
+
+    // Photos
+    lines.push('## Photos');
+    if (data.photos && data.photos.length > 0) {
+      lines.push(data.photos.length + ' photo(s) attached to this log.');
+      for (var k = 0; k < data.photos.length; k++) {
+        lines.push('- ' + data.photos[k].name);
+      }
+    } else {
+      lines.push('No photos attached.');
+    }
+    lines.push('');
+
+    // Sign-off
+    lines.push('## Sign-Off');
+    if (data.signature) {
+      lines.push('✓ Log signed and confirmed.');
+    } else {
+      lines.push('Not yet signed.');
+    }
+    lines.push('');
+
+    // Footer
+    lines.push('---');
+    lines.push('*Generated: ' + new Date().toLocaleString() + '*');
+
+    return lines.join('\n');
+  }
+
+  function showReport() {
+    var report = generateMarkdownReport();
+    document.getElementById('reportText').textContent = report;
+    document.getElementById('reportModal').classList.add('show');
+    // Reset copy button
+    var copyBtn = document.getElementById('copyBtn');
+    copyBtn.textContent = 'Copy to Clipboard';
+    copyBtn.classList.remove('copied');
+  }
+
+  function closeReport() {
+    document.getElementById('reportModal').classList.remove('show');
+  }
+
+  function copyReport() {
+    var reportText = document.getElementById('reportText').textContent;
+    var copyBtn = document.getElementById('copyBtn');
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(reportText).then(function() {
+        copyBtn.textContent = 'Copied!';
+        copyBtn.classList.add('copied');
+      }).catch(function() {
+        fallbackCopy(reportText, copyBtn);
+      });
+    } else {
+      fallbackCopy(reportText, copyBtn);
+    }
+  }
+
+  function fallbackCopy(text, btn) {
+    var textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.appendChild(textarea);
+    textarea.select();
+    try {
+      document.execCommand('copy');
+      btn.textContent = 'Copied!';
+      btn.classList.add('copied');
+    } catch (e) {
+      btn.textContent = 'Copy failed';
+    }
+    document.body.removeChild(textarea);
+  }
+
+  // Close modal on overlay click
+  document.getElementById('reportModal').addEventListener('click', function(e) {
+    if (e.target === this) closeReport();
+  });
+
+  // Close modal on Escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeReport();
+  });
 </script>
 
 </body>
