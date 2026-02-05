@@ -457,6 +457,20 @@
       min-height: 60px;
     }
     .btn-report:hover { background: #154360; }
+    .btn-report:disabled {
+      background: #7f8c8d;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .btn-report.sending {
+      background: #7f8c8d;
+    }
+    .btn-report.success {
+      background: #27ae60;
+    }
+    .btn-report.error {
+      background: #c0392b;
+    }
 
     /* ── Report Modal ───────────────────────────────────── */
     .modal-overlay {
@@ -655,7 +669,7 @@
 <div class="bottom-bar">
   <div class="bottom-bar-inner">
     <button class="btn btn-save" onclick="saveLog()">Save Log</button>
-    <button class="btn btn-report" onclick="showReport()">Send Report</button>
+    <button class="btn btn-report" id="sendReportBtn" onclick="sendReport()">Send Report</button>
   </div>
 </div>
 
@@ -1173,6 +1187,72 @@
     return lines.join('\n');
   }
 
+  // ── Send Report to Webhook ─────────────────────────
+  var WEBHOOK_URL = 'https://shanen8n.app.n8n.cloud/webhook-test/site-log-entry';
+
+  function sendReport() {
+    var btn = document.getElementById('sendReportBtn');
+    var originalText = btn.textContent;
+
+    // Prevent double-submit
+    if (btn.disabled) return;
+
+    // Set loading state
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+    btn.classList.remove('success', 'error');
+    btn.classList.add('sending');
+
+    // Gather all data
+    var data = gatherData();
+
+    // Also include the markdown report for convenience
+    data.markdownReport = generateMarkdownReport();
+
+    // Send POST request
+    fetch(WEBHOOK_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    .then(function(response) {
+      if (!response.ok) {
+        throw new Error('Server returned ' + response.status);
+      }
+      return response;
+    })
+    .then(function() {
+      // Success!
+      btn.textContent = 'Sent to Office! ✓';
+      btn.classList.remove('sending');
+      btn.classList.add('success');
+
+      // Reset button after 3 seconds
+      setTimeout(function() {
+        btn.disabled = false;
+        btn.textContent = originalText;
+        btn.classList.remove('success');
+      }, 3000);
+    })
+    .catch(function(error) {
+      // Error
+      console.error('Send failed:', error);
+      btn.textContent = 'Send Failed — Tap to Retry';
+      btn.classList.remove('sending');
+      btn.classList.add('error');
+
+      // Re-enable after 2 seconds
+      setTimeout(function() {
+        btn.disabled = false;
+        btn.textContent = originalText;
+        btn.classList.remove('error');
+      }, 3000);
+    });
+  }
+
+  // ── Preview Report (Modal) ────────────────────────────
   function showReport() {
     var report = generateMarkdownReport();
     document.getElementById('reportText').textContent = report;
