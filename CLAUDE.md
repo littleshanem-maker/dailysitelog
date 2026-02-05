@@ -7,7 +7,7 @@ This file provides guidance for AI assistants working on the **dailysitelog** pr
 **dailysitelog** is a **Tier 3 Construction Daily Site Log App** — a simple, mobile-first data entry tool for construction site teams. Workers and supervisors use it to record daily activity on job sites quickly and with minimal friction.
 
 - **Repository**: `littleshanem-maker/dailysitelog`
-- **Current state**: Early development (greenfield)
+- **Current state**: Single-page app with daily log entry form
 
 ### Core Product Goals
 
@@ -20,21 +20,24 @@ This file provides guidance for AI assistants working on the **dailysitelog** pr
 ```
 dailysitelog/
 ├── CLAUDE.md          # AI assistant guidance (this file)
-└── README.md          # Project readme
+├── README.md          # Project readme
+└── index.html         # Main app — single-page daily log form
 ```
-
-No source code, configuration files, tests, or dependencies exist yet. Update this section as the project grows.
 
 ## Tech Stack
 
-Not yet determined. When choosing technologies, prefer:
+- **HTML / CSS / vanilla JavaScript** — single `index.html` file, no build step, no dependencies
+- **localStorage** for draft auto-save and completed log storage
+- **No external frameworks or libraries** — keeps the app fast and offline-capable
+
+When extending, prefer:
 - Lightweight, mobile-friendly frameworks
 - Tools with strong offline/low-connectivity support (construction sites often have poor signal)
 - Simple data persistence that maps cleanly to tabular export (PDF, CSV, Excel)
 
 ## Build & Run
 
-No build system, scripts, or run commands are configured yet. Update this section once tooling is selected.
+No build step required. Open `index.html` directly in a browser to run the app.
 
 ## Testing
 
